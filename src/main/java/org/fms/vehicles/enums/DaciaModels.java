@@ -1,12 +1,29 @@
+/**
+Created: Nov 08, 2020
+@author Cezar FLOREA
+ */
+
 package org.fms.vehicles.enums;
+
+import org.fms.vehicles.manufacturers.Dacia;
 
 public enum DaciaModels {
     /* D    -- */
-    DUSTER, DOKKER,
+    DUSTER("Duster"), DOKKER("Dokker"),
 
     /* L    -- */
-    LODGY, LOGAN, LOGAN_STEPWAY,
+    LODGY("Lodgy"), LOGAN("Logan"), LOGAN_STEPWAY("Logan Stepway"),
 
     /* S    -- */
-    SANDERO, SANDERO_STEPWAY
+    SANDERO("Sandero"), SANDERO_STEPWAY("Sandero Stepway");
+
+    private String model;
+    private DaciaModels(String model) {
+        this.model = model;
+    }
+
+    @Override
+    public String toString(){
+        return model;
+    }
 }

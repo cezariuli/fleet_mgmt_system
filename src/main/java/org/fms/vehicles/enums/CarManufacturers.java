@@ -1,66 +1,71 @@
+/**
+Created: Nov 08, 2020
+@author Cezar FLOREA
+ */
+
 package org.fms.vehicles.enums;
 
 public enum CarManufacturers {
     /* A    -- */
-    ALFA_ROMEO, AUDI,
+    ALFA_ROMEO("Alfa Rome"), AUDI("Audi"),
 
     /* B    --  */
-    BMW,
+    BMW("BMW"),
 
     /* C    --  */
-    CHEVROLET, CITROEN,
+    CHEVROLET("Chevrolet"), CITROEN("Citroen"),
 
     /* D    --  */
-    DACIA,
+    DACIA("Dacia"),
 
     /* E    --  */
 
     /* F    --  */
-    FIAT, FORD,
+    FIAT("Fiat"), FORD("Ford"),
 
     /* G    --  */
 
     /* H    --  */
-    HONDA, HYUNDAI,
+    HONDA("Honda"), HYUNDAI("Hyundai"),
 
     /* I    --  */
 
     /* J    --  */
-    JEEP,
+    JEEP("Jeep"),
 
     /* K    --  */
-    KIA,
+    KIA("Kia"),
 
     /* L    --  */
-    LAND_ROVER, LEXUS,
+    LAND_ROVER("Land Rover"), LEXUS("Lexus"),
 
     /* M    --  */
-    MAZDA, MERCEDES_BENZ, MINI, MITSUBISHI,
+    MAZDA("Mazda"), MERCEDES_BENZ("Mercedes-Benz"), MINI("Mini"), MITSUBISHI("Mitsubishi"),
 
     /* N    --  */
-    NISSAN,
+    NISSAN("Nissan"),
 
     /* O    --  */
-    OPEL,
+    OPEL("Opel"),
 
     /* P    --  */
-    PEUGEOT, PORSCHE,
+    PEUGEOT("Peugeot"), PORSCHE("Porsche"),
 
     /* Q    --  */
 
     /* R    --  */
-    RENAULT,
+    RENAULT("Renault"),
 
     /* S    --  */
-    SEAT, SKODA, SMART, SUZUKI,
+    SEAT("Seat"), SKODA("Skoda"), SMART("Smart"), SUZUKI("Suzuki"),
 
     /* T    --  */
-    TESLA, TOYOTA,
+    TESLA("Tesla"), TOYOTA("Toyota"),
 
     /* U    --  */
 
     /* V    --  */
-    VOLKSWAGEN, VOLVO
+    VOLKSWAGEN("Volkswagen"), VOLVO("Volvo");
 
     /* W    --  */
 
@@ -69,5 +74,15 @@ public enum CarManufacturers {
     /* Y    --  */
 
     /* Z    --  */
+
+    private String manufacturer;
+    private CarManufacturers(String manufacturer){
+        this.manufacturer = manufacturer;
+    }
+
+    @Override
+    public String toString(){
+        return manufacturer;
+    }
 
 }
