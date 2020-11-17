@@ -1,4 +1,4 @@
-package org.example;
+package fms.example;
 
 import static org.junit.Assert.assertTrue;
 

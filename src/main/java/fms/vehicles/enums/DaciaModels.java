@@ -3,9 +3,7 @@ Created: Nov 08, 2020
 @author Cezar FLOREA
  */
 
-package org.fms.vehicles.enums;
-
-import org.fms.vehicles.manufacturers.Dacia;
+package fms.vehicles.enums;
 
 public enum DaciaModels {
     /* D    -- */

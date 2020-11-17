@@ -4,10 +4,10 @@
  * @author Cezar FLOREA
  */
 
-package org.fms.vehicles;
+package fms.vehicles;
 
-import org.fms.vehicles.enums.CarManufacturers;
-import org.fms.vehicles.enums.FuelTypes;
+import fms.vehicles.enums.CarManufacturers;
+import fms.vehicles.enums.FuelTypes;
 
 public class Vehicle {
 
