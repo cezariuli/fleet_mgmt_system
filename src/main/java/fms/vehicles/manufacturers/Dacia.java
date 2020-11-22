@@ -9,5 +9,9 @@ import fms.vehicles.Vehicle;
 import fms.vehicles.enums.DaciaModels;
 
 public class Dacia extends Vehicle {
-    private DaciaModels model;
+
+
+    public Dacia (String model, Integer modelYear, String vin) {
+      super("Dacia", model, modelYear, vin);
+    }
 }
