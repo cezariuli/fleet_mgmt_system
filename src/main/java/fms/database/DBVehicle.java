@@ -18,14 +18,25 @@ public class DBVehicle {
         }
     }
 
-    public void addNewCarInDB(Vehicle car) {
+    public void addNewCar(Vehicle car) {
         try {
-            String query = "INSERT INTO public.vehicles (model_year, model, car_maker, vin) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO vehicles (model_year, model, car_maker, vin) VALUES (?, ?, ?, ?)";
             PreparedStatement insertCarStatement = db.prepareStatement(query);
             insertCarStatement.setInt(1, car.getModelYear());
             insertCarStatement.setString(2, car.getModel());
             insertCarStatement.setString(3, car.getCarMaker());
             insertCarStatement.setString(4, car.getVin());
+            insertCarStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeCar(Vehicle car) {
+        try {
+            String query = "DELETE FROM vehicles WHERE vin = ?";
+            PreparedStatement insertCarStatement = db.prepareStatement(query);
+            insertCarStatement.setString(1, car.getVin());
             insertCarStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
