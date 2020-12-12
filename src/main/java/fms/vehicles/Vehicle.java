@@ -6,28 +6,26 @@
 
 package fms.vehicles;
 
-import fms.vehicles.enums.CarManufacturers;
-import fms.vehicles.enums.FuelTypes;
-
 public class Vehicle {
 
     private String carMaker;
     private String model;
     private Integer modelYear;
     private String vin;
+    private String fuelType;
     /*private String registrationNumber;
-    private FuelTypes fuelType;
     private Double fuelConsumptionUrban;
     private Double fuelConsumptionExtraUrban;
     private Double getFuelConsumptionMixed;
     private Integer maxSpeed;*/
 
     /* ... */
-    public Vehicle(String carMaker, String model, Integer modelYear, String vin) {
+    public Vehicle(String carMaker, String model, Integer modelYear, String vin, String fuelType) {
         this.carMaker = carMaker;
         this.model = model;
         this.modelYear = modelYear;
         this.vin = vin;
+        this.fuelType = fuelType;
     }
 
     public String getCarMaker() {
@@ -44,5 +42,9 @@ public class Vehicle {
 
     public String getVin() {
         return vin;
+    }
+
+    public String getFuelType() {
+        return fuelType;
     }
 }
