@@ -6,12 +6,11 @@ Created: Nov 08, 2020
 package fms.vehicles.manufacturers;
 
 import fms.vehicles.Vehicle;
-import fms.vehicles.enums.DaciaModels;
 
 public class Dacia extends Vehicle {
 
 
-    public Dacia (String model, Integer modelYear, String vin) {
-      super("Dacia", model, modelYear, vin);
+    public Dacia (String model, Integer modelYear, String vin, String fuelType) {
+      super("Dacia", model, modelYear, vin, fuelType);
     }
 }

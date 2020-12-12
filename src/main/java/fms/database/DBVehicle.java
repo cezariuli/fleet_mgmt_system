@@ -1,31 +1,30 @@
 package fms.database;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import fms.vehicles.Vehicle;
 
-public class DBVehicle {
+public class DBVehicle extends DBConnection {
 
     private Connection db;
-    private String url = "jdbc:postgresql://127.0.0.1:5432/fms?user=postgres&password=postgres";
 
     public DBVehicle() {
-
-        try {
-            Class.forName("org.postgresql.Driver");
-            db = DriverManager.getConnection(url);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+        this.db = super.getDbConnection();
     }
 
     public void addNewCar(Vehicle car) {
         try {
-            String query = "INSERT INTO vehicles (model_year, model, car_maker, vin) VALUES (?, ?, ?, ?)";
+            //use cast for custom types (?::custom_type)
+            String query = "INSERT INTO vehicles (car_maker, model, model_year, vin, fuel_type)" +
+                           "VALUES (?::type_carmaker, ?, ?, ?, ?::etype_fuel)";
             PreparedStatement insertCarStatement = db.prepareStatement(query);
-            insertCarStatement.setInt(1, car.getModelYear());
+            insertCarStatement.setString(1, car.getCarMaker());
             insertCarStatement.setString(2, car.getModel());
-            insertCarStatement.setString(3, car.getCarMaker());
+            insertCarStatement.setInt(3, car.getModelYear());
             insertCarStatement.setString(4, car.getVin());
+            insertCarStatement.setString(5, car.getFuelType());
             insertCarStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,5 +40,25 @@ public class DBVehicle {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Vehicle> getAllCars() {
+        List<Vehicle> cars = new ArrayList<>();
+        try {
+            Statement getCars = db.createStatement();
+            ResultSet carsResultSet = getCars.executeQuery("SELECT * FROM vehicles");
+            while (carsResultSet.next()) {
+                Vehicle car = new Vehicle(carsResultSet.getString(1),
+                        carsResultSet.getString(2),
+                        carsResultSet.getInt(3),
+                        carsResultSet.getString(4),
+                        carsResultSet.getString(5));
+                cars.add(car);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            System.out.println("SQL Exception");
+        }
+        return cars;
     }
 }
