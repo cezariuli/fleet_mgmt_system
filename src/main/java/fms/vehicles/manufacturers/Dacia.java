@@ -10,7 +10,7 @@ import fms.vehicles.Vehicle;
 public class Dacia extends Vehicle {
 
 
-    public Dacia (String model, Integer modelYear, String vin, String fuelType) {
-      super("Dacia", model, modelYear, vin, fuelType);
+    public Dacia (String model, Integer modelYear, String vin, String fuelType, String licensePlate) {
+      super("Dacia", model, modelYear, vin, fuelType, licensePlate);
     }
 }
