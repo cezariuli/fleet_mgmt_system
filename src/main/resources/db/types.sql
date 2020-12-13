@@ -22,3 +22,25 @@ ALTER TYPE public.type_carmaker
 
 COMMENT ON TYPE public.type_carmaker
     IS 'List of possible carmakers. ';
+
+-- Type: type_daciamodels
+
+-- DROP TYPE public.type_daciamodels;
+
+CREATE TYPE public.type_daciamodels AS
+(
+	"Dokker" text,
+	"Duster" text,
+	"Lodgy" text,
+	"Logan" text,
+	"Logan Stepway" text,
+	"Sandero" text,
+	"Sandero Stepway" text,
+	"Spring" text
+);
+
+ALTER TYPE public.type_daciamodels
+    OWNER TO cezar;
+
+COMMENT ON TYPE public.type_daciamodels
+    IS 'All Dacia models.';
