@@ -18,13 +18,14 @@ public class DBVehicle extends DBConnection {
         try {
             //use cast for custom types (?::custom_type)
             String query = "INSERT INTO vehicles (car_maker, model, model_year, vin, fuel_type)" +
-                           "VALUES (?::type_carmaker, ?, ?, ?, ?::etype_fuel)";
+                           "VALUES (?::type_carmaker, ?, ?, ?, ?::etype_fuel, ?)";
             PreparedStatement insertCarStatement = db.prepareStatement(query);
             insertCarStatement.setString(1, car.getCarMaker());
             insertCarStatement.setString(2, car.getModel());
             insertCarStatement.setInt(3, car.getModelYear());
             insertCarStatement.setString(4, car.getVin());
             insertCarStatement.setString(5, car.getFuelType());
+            insertCarStatement.setString(6, car.getLicensePlate());
             insertCarStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,7 +53,8 @@ public class DBVehicle extends DBConnection {
                         carsResultSet.getString(2),
                         carsResultSet.getInt(3),
                         carsResultSet.getString(4),
-                        carsResultSet.getString(5));
+                        carsResultSet.getString(5),
+                        carsResultSet.getString(6));
                 cars.add(car);
             }
         } catch (SQLException throwables) {

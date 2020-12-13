@@ -72,6 +72,7 @@
                 <th>Model Year</th>
                 <th>VIN</th>
                 <th>Fuel Type</th>
+                <th>License Plate</th>
               </tr>
               <c:forEach var="car" items="${requestScope.cars}">
               <tr>
@@ -80,6 +81,7 @@
                 <td><c:out value="${car.getModelYear()}"/></td>
                 <td><c:out value="${car.getVin()}"/></td>
                 <td><c:out value="${car.getFuelType()}"/></td>
+                <td><c:out value="${car.getLicensePlate()}"/></td>
               </tr>
               </c:forEach>
           </table>
