@@ -8,7 +8,8 @@ CREATE TABLE public.vehicles
     model character varying(32) COLLATE pg_catalog."default" NOT NULL,
     model_year integer NOT NULL,
     vin character varying(17) COLLATE pg_catalog."default" NOT NULL,
-    fuel_type etype_fuel
+    fuel_type etype_fuel,
+    license_plate character varying COLLATE pg_catalog."default" NOT NULL
 )
 
 TABLESPACE pg_default;
@@ -25,3 +26,6 @@ COMMENT ON COLUMN public.vehicles.model_year
 
 COMMENT ON COLUMN public.vehicles.vin
     IS 'Vehicle Identification Number';
+
+ COMMENT ON COLUMN public.vehicles.license_plate
+    IS 'Registration number or the license plate of the vehicle.';
