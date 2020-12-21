@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/fleet", "/fleetAdd.jsp"})
+@WebServlet(urlPatterns = {"/fleet"})
 
 public class VehicleServlet extends HttpServlet {
 
@@ -30,7 +30,7 @@ public class VehicleServlet extends HttpServlet {
 
         switch (action) {
             case "add":
-                forwardToForm(req, resp);
+                forwardToAddForm(req, resp);
                 break;
             default:
                 forwardToList(req, resp);
@@ -44,7 +44,7 @@ public class VehicleServlet extends HttpServlet {
         req.getRequestDispatcher("/static/fleet.jsp").forward(req, resp);
     }
 
-    private void forwardToForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void forwardToAddForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("oems", dbCustomTypes.getCarMakers());
         req.getRequestDispatcher("/static/fleetAdd.jsp").forward(req, resp);
     }
