@@ -17,7 +17,7 @@ public class DBVehicle extends DBConnection {
     public void addNewCar(Vehicle car) {
         try {
             //use cast for custom types (?::custom_type)
-            String query = "INSERT INTO vehicles (car_maker, model, model_year, vin, fuel_type)" +
+            String query = "INSERT INTO vehicles (car_maker, model, model_year, vin, fuel_type, license_plate)" +
                            "VALUES (?::type_carmaker, ?, ?, ?, ?::etype_fuel, ?)";
             PreparedStatement insertCarStatement = db.prepareStatement(query);
             insertCarStatement.setString(1, car.getCarMaker());
