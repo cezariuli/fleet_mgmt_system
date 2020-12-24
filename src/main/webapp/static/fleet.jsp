@@ -14,23 +14,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <head>
-    <style>
-        html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
-        .w3-sidebar {
-          z-index: 3;
-          width: 250px;
-          top: 43px;
-          bottom: 0;
-          height: inherit;
-        }
-        .footer {
-          position: fixed;
-          left: 250px;
-          bottom: 0;
-          width: 100%;
-        }
-    </style>
-    <title>Fleet Management System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+      html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+      .w3-sidebar {
+        z-index: 3;
+        width: 250px;
+        top: 43px;
+        bottom: 0;
+        height: inherit;
+      }
+      .footer {
+        position: fixed;
+        left: 250px;
+        bottom: 0;
+        width: 100%;
+      }
+  </style>
+  <title>Fleet Management System</title>
 </head>
 
 <body>
@@ -52,7 +53,7 @@
       <i class="fa fa-remove"></i>
       </a>
       <a class="w3-bar-item w3-button w3-hover-black" href="fleet">List cars</a>
-      <a class="w3-bar-item w3-button w3-hover-black" href="">Maintenance</a>
+      <a class="w3-bar-item w3-button w3-hover-black" href="fleet?action=maintenance">Maintenance</a>
       <a class="w3-bar-item w3-button w3-hover-black" href="fleet?action=add">Add new car</a>
 
     </nav>
@@ -65,23 +66,32 @@
 
       <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
-          <table>
-              <tr>
+          <h1 class="w3-text-teal">List of vehicles</h1>
+          <table class="w3-table-all w3-hoverable">
+              <tr class="w3-light-blue">
                 <th>OEM</th>
                 <th>Model</th>
                 <th>Model Year</th>
-                <th>VIN</th>
                 <th>Fuel Type</th>
                 <th>License Plate</th>
+                <th>Odometer (km)</th>
+                <th class="w3-center">More details</th>
               </tr>
               <c:forEach var="car" items="${requestScope.cars}">
               <tr>
                 <td><c:out value="${car.getCarMaker()}"/></td>
                 <td><c:out value="${car.getModel()}"/></td>
                 <td><c:out value="${car.getModelYear()}"/></td>
-                <td><c:out value="${car.getVin()}"/></td>
                 <td><c:out value="${car.getFuelType()}"/></td>
                 <td><c:out value="${car.getLicensePlate()}"/></td>
+                <td>0</td>
+                <td class="w3-center" >
+                  
+                    <a href="fleet?action=details">
+                      <i class="fa fa-gear fa-lg"></i>
+                    </a>
+                  
+                </td>
               </tr>
               </c:forEach>
           </table>

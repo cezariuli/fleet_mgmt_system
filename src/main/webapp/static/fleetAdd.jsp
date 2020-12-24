@@ -52,7 +52,7 @@
       <i class="fa fa-remove"></i>
       </a>
       <a class="w3-bar-item w3-button w3-hover-black" href="fleet">List cars</a>
-      <a class="w3-bar-item w3-button w3-hover-black" href="">Maintenance</a>
+      <a class="w3-bar-item w3-button w3-hover-black" href="fleet?action=maintenance">Maintenance</a>
       <a class="w3-bar-item w3-button w3-hover-black" href="fleet?action=add">Add new car</a>
 
     </nav>
@@ -65,7 +65,7 @@
 
       <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
-            <form method="post">
+            <form method="post" target="_self">
                 <label for="car_maker">Car Maker: </label><br>
                 <select id="oems" name="car_maker" required>
                     <c:forEach var="oem" items="${requestScope.oems}">
