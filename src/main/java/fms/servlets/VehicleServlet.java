@@ -3,6 +3,8 @@ package fms.servlets;
 import fms.database.DBCustomTypes;
 import fms.database.DBVehicle;
 import fms.vehicles.Vehicle;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,16 +20,20 @@ public class VehicleServlet extends HttpServlet {
     private DBVehicle carsDB;
     private DBCustomTypes dbCustomTypes;
 
+    static final Logger log = LogManager.getLogger(VehicleServlet.class.getName());
+
     @Override
     public void init() {
         carsDB = new DBVehicle();
         dbCustomTypes = new DBCustomTypes();
+        log.info("VehicleServlet initialised");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String action = req.getParameter("action");
         action = (action != null) ? action : "list";
+        log.debug("doGet method of VehicleServlet called.");
 
         switch (action) {
             case "add":
@@ -65,6 +71,7 @@ public class VehicleServlet extends HttpServlet {
     private void forwardToList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("cars", carsDB.getAllCars());
         req.getRequestDispatcher("/static/fleet.jsp").forward(req, resp);
+        log.debug("Request of listing cars forwarded to client.");
     }
 
     private void forwardToAddForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
