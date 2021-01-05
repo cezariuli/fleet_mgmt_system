@@ -14,11 +14,19 @@ public class Vehicle {
     private String vin;
     private String fuelType;
     private String licensePlate;
-    /*private String registrationNumber;
-    private Double fuelConsumptionUrban;
-    private Double fuelConsumptionExtraUrban;
-    private Double getFuelConsumptionMixed;
-    private Integer maxSpeed;*/
+    /*
+    private Integer odometer;
+    private String transmission;
+    private Integer power;
+    private Double fuelConsumption;
+    private String body;
+    private Integer noOfPassengers;
+    private Integer luggage;
+    private Integer noOfDoors;
+    private Integer co2
+    private String airConditioner;
+    private Boolean navigation;
+    */
 
     /* ... */
     public Vehicle(String carMaker, String model, Integer modelYear, String vin, String fuelType, String licensePlate) {

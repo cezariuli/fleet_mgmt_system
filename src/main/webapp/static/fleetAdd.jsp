@@ -66,37 +66,88 @@
       <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
             <form method="post" target="_self">
-                <label for="car_maker">Car Maker: </label><br>
-                <select id="oems" name="car_maker" required>
-                    <c:forEach var="oem" items="${requestScope.oems}">
-                    <option>
-                    <c:out value="${oem}"/>
-                    </option>
-                    </c:forEach>
-                </select><br>
-                <label for="car_model">Car Model: </label><br>
-                <input type="text" id="car_model" name="car_model" placeholder="i.e. Logan" required><br>
-                <label for="model_year">Model Year: </label><br>
-                <input type="number" id="model_year" name="model_year" min="2000" max="2021" placeholder="2019" required><br>
-                <label for="vin">VIN: </label><br>
-                <input type="text" id="vin" name="vin" placeholder="UU1BSDA1PJ0000001" required><br>
-                <label for="fuel_type">Fuel: </label><br>
-                <select id="fuel_type" name="fuel_type" required>
-                    <option>Diesel</option>
-                    <option>Diesel + Electric</option>
-                    <option>Petrol</option>
-                    <option>Petrol + Electric</option>
-                    <option>Petrol + LPG</option>
-                    <option>Petrol + LPG + Electric</option>
-                    <option>Electric</option>
-                </select><br>
-                <label for="license_plate">License Plate: </label><br>
-                <input type="text" id="license_plate" name="license_plate" placeholder="CJ 01 FMS" required><br><br>
-                <input type="submit" name="submit" value="Submit">
-            </form>
+
+                <div class="w3-third w3-container">
+                    <label for="car_maker">Car Maker: </label><br>
+                    <select class="w3-margin-bottom" id="oems" name="car_maker" required>
+                        <c:forEach var="oem" items="${requestScope.oems}">
+                        <option>
+                        <c:out value="${oem}"/>
+                        </option>
+                        </c:forEach>
+                    </select><br>
+                    <label for="car_model">Car Model: </label><br>
+                    <input class="w3-margin-bottom" type="text" id="car_model" name="car_model" placeholder="i.e. Logan" required><br>
+                    <label for="model_year">Model Year: </label><br>
+                    <input class="w3-margin-bottom" type="number" id="model_year" name="model_year" min="2000" max="2021" placeholder="2019" required><br>
+                    <label for="vin">VIN: </label><br>
+                    <input class="w3-margin-bottom" type="text" id="vin" name="vin" placeholder="UU1BSDA1PJ0000001" required><br>
+                    <label for="fuel_type">Fuel: </label><br>
+                    <select class="w3-margin-bottom" id="fuel_type" name="fuel_type" required><br>
+                        <option>Diesel</option>
+                        <option>Diesel + Electric</option>
+                        <option>Petrol</option>
+                        <option>Petrol + Electric</option>
+                        <option>Petrol + LPG</option>
+                        <option>Petrol + LPG + Electric</option>
+                        <option>Electric</option>
+                    </select><br>
+                    <label for="license_plate">License Plate: </label><br>
+                    <input class="w3-margin-bottom" type="text" id="license_plate" name="license_plate" placeholder="CJ 01 FMS" required><br>
+                </div>
+
+                <div class="w3-third w3-container">
+                    <label for="odometer">Odometer: </label><br>
+                    <input class="w3-margin-bottom" type="number" id="odometer" name="odometer"><br>
+                    <label for="transmission">Transmission: </label><br>
+                    <select class="w3-margin-bottom" id="transmission" name="transmission">
+                        <option>Manual</option>
+                        <option>Automatic</option>
+                    </select><br>
+                    <label for="power">Power [kW]: </label><br>
+                    <input class="w3-margin-bottom" type="number" name="power" name="power"><br>
+                    <label for="fuel_consumption">Fuel Consumption [l/100km]: </label><br>
+                    <input class="w3-margin-bottom" type="number" id="fuel_consumption" name="fuel_consumption" placeholder="i.e. 5.3"><br>
+                    <label for="Body">Body: </label><br>
+                    <select class="w3-margin-bottom" id="body" name="body">
+                        <option>Hatchback</option>
+                        <option>Sedan</option>
+                        <option>Break</option>
+                        <option>SUV</option>
+                        <option>Mini VAN</option>
+                        <option>VAN</option>
+                    </select><br>
+                    <label for="no_of_passengers">No. of passengers: </label><br>
+                    <input type="number" name="no_of_passengers" id="no_of_passengers"><br>
+                </div>
+
+                <div class="w3-third w3-container">
+                    <label for="luggage">Luggage capacity: </label><br>
+                    <input class="w3-margin-bottom" type="number" id="luggage"><br>
+                    <label for="no_of_doors">No of doors: </label><br>
+                    <input class="w3-margin-bottom" type="number" id="no_of_doors"><br>
+                    <label for="co2">CO2 emission [g/km]: </label><br>
+                    <input class="w3-margin-bottom" type="number" id="co2"><br>
+                    <label for="air_cond">A/C: </label><br>
+                    <select class="w3-margin-bottom" id="air_cond" name="air_cond">
+                        <option>Automatic</option>
+                        <option>Manual</option>
+                        <option>No</option>
+                    </select><br>
+                    <label for="navigation">Navigation: </label><br>
+                    <select class="w3-margin-bottom" id="navigation" name="navigation">
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select><br>
+                    <input  type="submit" name="submit" value="Submit">
+                </div> 
+    
+            </form>  
         </div>
     </div>
 
+    <!-- END MAIN -->
+    </div>
     <footer class="footer" id="myFooter">
         <div class="w3-container w3-theme-l2 w3-padding-32">
             <h4>Fleet Management System</h4>
@@ -106,10 +157,6 @@
           <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
         </div>
     </footer>
-
-    <!-- END MAIN -->
-    </div>
-    
     <script>
     // Get the Sidebar
     var mySidebar = document.getElementById("mySidebar");
