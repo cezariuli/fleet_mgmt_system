@@ -77,9 +77,8 @@ public class DBVehicle extends DBConnection {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
             log.error("Query for adding new car in database is incorrect");
-            log.error(e);
+            log.error(e.getStackTrace());
         }
     }
 
@@ -90,15 +89,16 @@ public class DBVehicle extends DBConnection {
             insertCarStatement.setString(1, car.getVin());
             insertCarStatement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.getStackTrace());
         }
     }
 
     public List<Vehicle> getAllCars() {
         List<Vehicle> cars = new ArrayList<>();
-        try {
-            Statement getCars = db.createStatement();
+        try (Statement getCars = db.createStatement()) {
+
             ResultSet carsResultSet = getCars.executeQuery("SELECT * FROM vehicles");
+
             while (carsResultSet.next()) {
                 Vehicle car = new Vehicle(carsResultSet.getString(1),
                         carsResultSet.getString(2),
@@ -109,8 +109,7 @@ public class DBVehicle extends DBConnection {
                 cars.add(car);
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            System.out.println("SQL Exception");
+            log.error(throwables.getStackTrace());
         }
         return cars;
     }
