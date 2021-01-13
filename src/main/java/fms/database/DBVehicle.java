@@ -159,4 +159,44 @@ public class DBVehicle extends DBConnection {
             log.error(throwables.getStackTrace());
         }
     }
+
+    public Vehicle getCarByVin (String vin) {
+
+        Vehicle car;
+
+        try (PreparedStatement stmt = db.prepareStatement("SELECT * FROM vehicles WHERE vin = ? ") ){
+
+            stmt.setString(1, vin);
+
+            ResultSet rs = stmt.executeQuery();
+
+            rs.next();
+
+            car = new Vehicle(rs.getString("car_maker"),
+                        rs.getString("model"),
+                        rs.getInt("model_year"),
+                        vin,
+                        rs.getString("fuel_type"),
+                        rs.getString("license_plate"));
+            car.setOdometer(rs.getInt("odometer"));
+            car.setTransmission(rs.getString("transmission"));
+            car.setPower(rs.getInt("power"));
+            car.setFuelConsumption(rs.getDouble("fuel_consumption"));
+            car.setBody(rs.getString("body"));
+            car.setNoOfPassengers(rs.getInt("no_of_passengers"));
+            car.setLuggage(rs.getInt("luggage"));
+            car.setNoOfDoors(rs.getInt("no_of_doors"));
+            car.setCo2(rs.getInt("co2"));
+            car.setAirConditioner(rs.getString("air_cond"));
+            car.setNavigation(Boolean.toString(rs.getBoolean("navigation")));
+
+            return car;
+
+        } catch (SQLException throwables) {
+            log.error(throwables.getStackTrace());
+        }
+
+        return null;
+    }
+
 }

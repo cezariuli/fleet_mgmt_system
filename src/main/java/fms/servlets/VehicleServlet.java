@@ -39,6 +39,9 @@ public class VehicleServlet extends HttpServlet {
             case "add":
                 forwardToAddForm(req, resp);
                 break;
+            case "edit":
+                forwardToEditForm(req, resp);
+                break;
             default:
                 forwardToList(req, resp);
 
@@ -123,5 +126,12 @@ public class VehicleServlet extends HttpServlet {
     private void forwardToAddForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("oems", dbCustomTypes.getCarMakers());
         req.getRequestDispatcher("/static/fleetAdd.jsp").forward(req, resp);
+    }
+
+    private void forwardToEditForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        req.setAttribute("car", carsDB.getCarByVin(req.getParameter("vin")));
+        req.setAttribute("oems", dbCustomTypes.getCarMakers());
+        req.getRequestDispatcher("/static/fleetEdit.jsp").forward(req, resp);
     }
 }

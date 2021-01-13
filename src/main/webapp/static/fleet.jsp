@@ -87,7 +87,7 @@
                 <td>0</td>
                 <td class="w3-center" >
                   
-                    <a href="fleet?action=details">
+                    <a href="fleet?action=edit&vin=${car.getVin()}">
                       <i class="fa fa-gear fa-lg"></i>
                     </a>
                   
