@@ -84,7 +84,7 @@
                 <td><c:out value="${car.getModelYear()}"/></td>
                 <td><c:out value="${car.getFuelType()}"/></td>
                 <td><c:out value="${car.getLicensePlate()}"/></td>
-                <td>0</td>
+                <td><c:out value="${car.getOdometer()}"/></td>
                 <td class="w3-center" >
                   
                     <a href="fleet?action=edit&vin=${car.getVin()}">

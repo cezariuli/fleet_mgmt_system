@@ -27,6 +27,11 @@ public class Vehicle {
     private String navigation;
 
     /* ... */
+
+    public Vehicle() {
+
+    }
+
     public Vehicle(String carMaker, String model, Integer modelYear, String vin, String fuelType, String licensePlate) {
         this.carMaker = carMaker;
         this.model = model;
@@ -165,13 +170,12 @@ public class Vehicle {
         this.airConditioner = airConditioner;
     }
 
-    public Boolean getNavigation() {
-        if (navigation == "Yes") return true;
-        else
-            return false;
+    public String getNavigation() {
+     return navigation;
     }
 
     public void setNavigation(String navigation) {
         this.navigation = navigation;
+
     }
 }

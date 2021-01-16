@@ -69,7 +69,7 @@
 
                 <div class="w3-third w3-container">
                     <label for="car_maker">Car Maker: </label><br>
-                    <select class="w3-margin-bottom" id="oems" name="car_maker" value="">
+                    <select class="w3-margin-bottom" id="oems" name="car_maker">
                         <c:forEach var="oem" items="${requestScope.oems}">
                         <option 
                             <c:if test = "${oem == requestScope.car.getCarMaker()}">
@@ -79,22 +79,55 @@
                         </option>
                         </c:forEach>
                     </select><br>
+
                     <label for="car_model">Car Model: </label><br>
                     <input class="w3-margin-bottom" type="text" id="car_model" name="car_model" value="${requestScope.car.getModel()}"><br>
+                    
                     <label for="model_year">Model Year: </label><br>
                     <input class="w3-margin-bottom" type="number" id="model_year" name="model_year" min="2000" max="2021" value="${requestScope.car.getModelYear()}"><br>
+                    
                     <label for="vin">VIN:</label><br>
                     <input class="w3-margin-bottom" type="text" id="vin" name="vin" value="${requestScope.car.getVin()}"><br>
+                    
                     <label for="fuel_type">Fuel:</label><br>
-                    <select class="w3-margin-bottom" id="fuel_type" name="fuel_type" value="equestScope.car.getFuelType()}"><br>
-                        <option>Diesel</option>
-                        <option>Diesel + Electric</option>
-                        <option>Petrol</option>
-                        <option>Petrol + Electric</option>
-                        <option>Petrol + LPG</option>
-                        <option>Petrol + LPG + Electric</option>
-                        <option>Electric</option>
+                    <select class="w3-margin-bottom" id="fuel_type" name="fuel_type">
+                        <option
+                            <c:if test = "${'Diesel' == requestScope.car.getFuelType() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Diesel</option>
+                        <option
+                            <c:if test = "${'Diesel + Electric' == requestScope.car.getFuelType() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                            Diesel + Electric</option>
+                        <option
+                            <c:if test = "${'Petrol' == requestScope.car.getFuelType() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                            Petrol</option>
+                        <option
+                            <c:if test = "${'Petrol + Electric' == requestScope.car.getFuelType() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                            Petrol + Electric</option>
+                        <option
+                            <c:if test = "${'Petrol + LPG' == requestScope.car.getFuelType() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Petrol + LPG</option>
+                        <option
+                            <c:if test = "${'Petrol + LPG + Electric' == requestScope.car.getFuelType() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                            Petrol + LPG + Electric</option>
+                        <option
+                            <c:if test = "${'Electric' == requestScope.car.getFuelType() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Electric</option>
                     </select><br>
+
                     <label for="license_plate">License Plate:</label><br>
                     <input class="w3-margin-bottom" type="text" id="license_plate" name="license_plate" value="${requestScope.car.getLicensePlate()}"><br>
                 </div>
@@ -102,48 +135,109 @@
                 <div class="w3-third w3-container">
                     <label for="odometer">Odometer [km]: </label><br>
                     <input class="w3-margin-bottom" type="number" id="odometer" name="odometer" value="${requestScope.car.getOdometer()}"><br>
+                    
                     <label for="transmission">Transmission: </label><br>
-                    <select class="w3-margin-bottom" id="transmission" name="transmission" value="${requestScope.car.getTransmission()}">
-                        <option>Manual</option>
-                        <option>Automatic</option>
+                    <select class="w3-margin-bottom" id="transmission" name="transmission">
+                        <option
+                            <c:if test = "${'Manual' == requestScope.car.getTransmission() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Manual</option>
+                        <option
+                            <c:if test = "${'Automatic' == requestScope.car.getTransmission() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Automatic</option>
                     </select><br>
+                    
                     <label for="power">Power [kW]: </label><br>
                     <input class="w3-margin-bottom" type="number" name="power" name="power" value="${requestScope.car.getPower()}"><br>
+                    
                     <label for="fuel_consumption">Fuel Consumption [l/100km]: </label><br>
                     <input class="w3-margin-bottom" type="number" id="fuel_consumption" name="fuel_consumption" value="${requestScope.car.getFuelConsumption()}"><br>
+                    
                     <label for="Body">Body: </label><br>
-                    <select class="w3-margin-bottom" id="body" name="body" value="${requestScope.car.getBody()}">
-                        <option>Hatchback</option>
-                        <option>Sedan</option>
-                        <option>Break</option>
-                        <option>SUV</option>
-                        <option>Mini VAN</option>
-                        <option>VAN</option>
+                    <select class="w3-margin-bottom" id="body" name="body">
+                        <option
+                            <c:if test = "${'Hatchback' == requestScope.car.getBody() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Hatchback</option>
+                        <option
+                            <c:if test = "${'Sedan' == requestScope.car.getBody() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Sedan</option>
+                        <option
+                            <c:if test = "${'Break' == requestScope.car.getBody() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Break</option>
+                        <option
+                            <c:if test = "${'SUV' == requestScope.car.getBody() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        SUV</option>
+                        <option
+                            <c:if test = "${'Mini VAN' == requestScope.car.getBody() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Mini VAN</option>
+                        <option
+                            <c:if test = "${'VAN' == requestScope.car.getBody() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        VAN</option>
                     </select><br>
+                    
                     <label for="no_of_passengers">No. of passengers: </label><br>
                     <input type="number" name="no_of_passengers" id="no_of_passengers" value="${requestScope.car.getNoOfPassengers()}"><br>
                 </div>
 
                 <div class="w3-third w3-container">
                     <label for="luggage">Luggage capacity: </label><br>
-                    <input class="w3-margin-bottom" type="number" id="luggage" value="${requestScope.car.getLuggage()}"><br>
+                    <input class="w3-margin-bottom" name="luggage" type="number" id="luggage" value="${requestScope.car.getLuggage()}"><br>
+                    
                     <label for="no_of_doors">No of doors: </label><br>
-                    <input class="w3-margin-bottom" type="number" id="no_of_doors" value="${requestScope.car.getNoOfDoors()}"><br>
+                    <input class="w3-margin-bottom" name="no_of_doors" type="number" id="no_of_doors" value="${requestScope.car.getNoOfDoors()}"><br>
+                    
                     <label for="co2">CO2 emission [g/km]: </label><br>
-                    <input class="w3-margin-bottom" type="number" id="co2" value="${requestScope.car.getCo2()}"><br>
+                    <input class="w3-margin-bottom" name="co2" type="number" id="co2" value="${requestScope.car.getCo2()}"><br>
+                    
                     <label for="air_cond">A/C: </label><br>
-                    <select class="w3-margin-bottom" id="air_cond" name="air_cond" value="${requestScope.car.getAirConditioner()}">
-                        <option>Automatic</option>
-                        <option>Manual</option>
-                        <option>No</option>
+                    <select class="w3-margin-bottom" id="air_cond" name="air_cond" >
+                        <option
+                            <c:if test = "${'Automatic' == requestScope.car.getAirConditioner() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Automatic</option>
+                        <option
+                            <c:if test = "${'Manual' == requestScope.car.getAirConditioner() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Manual</option>
+                        <option
+                            <c:if test = "${'No' == requestScope.car.getAirConditioner() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        No</option>
                     </select><br>
+                    
                     <label for="navigation">Navigation: </label><br>
-                    <select class="w3-margin-bottom" id="navigation" name="navigation" value="${requestScope.car.getNavigation()}">
-                        <option>Yes</option>
-                        <option>No</option>
+                    <select class="w3-margin-bottom" id="navigation" name="navigation">
+                        <option
+                            <c:if test = "${'Yes' == requestScope.car.getNavigation() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        Yes</option>
+                        <option
+                            <c:if test = "${'No' == requestScope.car.getNavigation() }">
+                                <c:out value = "${'selected'}"/>
+                            </c:if> >
+                        No</option>
                     </select><br>
                 </div> 
-                <input  class="w3-display-bottomright" type="submit" name="submit" value="Submit">
+                <input  class="w3-display-bottomright" type="submit" name="submit" value="Save">
             </form>  
         </div>
     </div>
