@@ -33,7 +33,7 @@ public class VehicleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String action = req.getParameter("action");
         action = (action != null) ? action : "list";
-        log.debug("doGet method of VehicleServlet called.");
+        log.debug("doGet method of VehicleServlet called with action = " + action);
 
         switch (action) {
             case "add":
@@ -41,6 +41,10 @@ public class VehicleServlet extends HttpServlet {
                 break;
             case "edit":
                 forwardToEditForm(req, resp);
+                break;
+            case "remove":
+                carsDB.removeCar(req.getParameter("vin"));
+                forwardToList(req, resp);
                 break;
             default:
                 forwardToList(req, resp);
@@ -56,22 +60,21 @@ public class VehicleServlet extends HttpServlet {
 
         Vehicle car = new Vehicle();
 
-        log.debug("doPost method of VehicleServlet called.");
+        log.debug("doPost method of VehicleServlet called with action " + action);
 
         switch (action) {
             case "add":
-
                 car = updateCarPropertiesInDB(req, resp);
                 carsDB.updateCarInfo(car, action);
                 forwardToAddForm(req, resp);
                 break;
 
             case "edit":
-
                 car = updateCarPropertiesInDB(req,resp);
                 carsDB.updateCarInfo(car, action);
                 forwardToList(req, resp);
                 break;
+
             default:
                 System.out.println("Post default");
         }

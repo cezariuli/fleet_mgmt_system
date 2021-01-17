@@ -83,11 +83,11 @@ public class DBVehicle extends DBConnection {
         }
     }
 */
-    public void removeCar(Vehicle car) {
+    public void removeCar(String vin) {
         try {
             String query = "DELETE FROM vehicles WHERE vin = ?";
             PreparedStatement insertCarStatement = db.prepareStatement(query);
-            insertCarStatement.setString(1, car.getVin());
+            insertCarStatement.setString(1, vin);
             insertCarStatement.execute();
         } catch (SQLException e) {
             log.error(e.getStackTrace());

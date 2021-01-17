@@ -87,10 +87,12 @@
                 <td><c:out value="${car.getOdometer()}"/></td>
                 <td class="w3-center" >
                   
-                    <a href="fleet?action=edit&vin=${car.getVin()}">
+                    <a href="fleet?action=edit&vin=${car.getVin()}" >
                       <i class="fa fa-gear fa-lg"></i>
                     </a>
-                  
+                    <a href="fleet?action=remove&vin=${car.getVin()}" class="w3-right">
+                      <i class="fa fa-trash" style="font-size:20px;color:red"></i>
+                    </a>
                 </td>
               </tr>
               </c:forEach>
