@@ -18,6 +18,7 @@ public class DBVehicle extends DBConnection {
         this.db = super.getDbConnection();
     }
 
+/*
     public void addNewCar(Vehicle car) {
         try {
             //use cast for custom types (?::custom_type)
@@ -81,7 +82,7 @@ public class DBVehicle extends DBConnection {
             log.error(e.getStackTrace());
         }
     }
-
+*/
     public void removeCar(Vehicle car) {
         try {
             String query = "DELETE FROM vehicles WHERE vin = ?";
@@ -92,6 +93,7 @@ public class DBVehicle extends DBConnection {
             log.error(e.getStackTrace());
         }
     }
+
 
     public List<Vehicle> getAllCars() {
         List<Vehicle> cars = new ArrayList<>();
@@ -106,6 +108,7 @@ public class DBVehicle extends DBConnection {
                         carsResultSet.getString(4),
                         carsResultSet.getString(5),
                         carsResultSet.getString(6));
+                car.setOdometer(carsResultSet.getInt(7));
                 cars.add(car);
             }
         } catch (SQLException throwables) {
@@ -114,44 +117,61 @@ public class DBVehicle extends DBConnection {
         return cars;
     }
 
-    public void updateColumn(String column, Vehicle car) {
-        String query = "UPDATE vehicles SET " + column + " = ? WHERE vin = " + car.getVin();
+    public void updateCarInfo(Vehicle car, String action) {
 
-        log.debug("Update Column query = ");
+        String query = new String();
 
-        try (PreparedStatement updateColumnStatement = db.prepareStatement(query)) {
+        switch (action) {
+            case "add":
+                query = "INSERT INTO vehicles (car_maker, model, model_year, vin, fuel_type, license_plate" +
+                        ", odometer, transmission, power, fuel_consumption, body, no_of_passengers" +
+                        ", luggage, no_of_doors, co2, air_cond, navigation)" +
+                        "VALUES (?::type_carmaker, ?, ?, ?, ?::etype_fuel, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                break;
+            case "edit":
+                query = "UPDATE vehicles SET car_maker = ?::type_carmaker, model = ?, " +
+                        "model_year = ?, vin = ?, " +
+                        "fuel_type = ?::etype_fuel, license_plate = ?, " +
+                        "odometer = ?, transmission = ?, " +
+                        "power = ?, fuel_consumption = ?, " +
+                        "body = ?, no_of_passengers = ?, " +
+                        "luggage = ?, no_of_doors = ?, " +
+                        "co2 = ?, air_cond = ?, navigation = ? " +
+                        "WHERE vin = '" + car.getVin() + "'";
+                break;
+            default:
+                log.warn("Not a valid action for updateCarInfo() method");
+        }
 
-            switch (column){
-                case "odometer":
-                    updateColumnStatement.setInt(1, car.getOdometer());
-                    break;
-                case "power":
-                    updateColumnStatement.setInt(1, car.getPower());
-                    break;
-                case "no_of_passengers":
-                    updateColumnStatement.setInt(1, car.getNoOfPassengers());
-                    break;
-                case "luggage":
-                    updateColumnStatement.setInt(1, car.getLuggage());
-                    break;
-                case "no_of_doors":
-                    updateColumnStatement.setInt(1, car.getNoOfDoors());
-                    break;
-                case "co2":
-                    updateColumnStatement.setInt(1, car.getCo2());
-                    break;
-                case "fuel_consumption":
-                    updateColumnStatement.setDouble(1, car.getFuelConsumption());
-                    break;
-                default:
-                    log.warn(column + "is not a known column to be updated");
-            }
+        try (PreparedStatement updateColumnsStatement = db.prepareStatement(query)) {
 
-            if (updateColumnStatement.execute()) {
-                log.debug("Update of " + column + "executed successfully");
+            updateColumnsStatement.setString(1, car.getCarMaker());
+            updateColumnsStatement.setString(2, car.getModel());
+            updateColumnsStatement.setInt(3, car.getModelYear());
+            updateColumnsStatement.setString(4, car.getVin());
+            updateColumnsStatement.setString(5, car.getFuelType());
+            updateColumnsStatement.setString(6, car.getLicensePlate());
+            updateColumnsStatement.setInt(7, car.getOdometer());
+            updateColumnsStatement.setString(8, car.getTransmission());
+            updateColumnsStatement.setInt(9, car.getPower());
+            updateColumnsStatement.setDouble(10, car.getFuelConsumption());
+            updateColumnsStatement.setString(11, car.getBody());
+            updateColumnsStatement.setInt(12, car.getNoOfPassengers());
+            updateColumnsStatement.setInt(13, car.getLuggage());
+            updateColumnsStatement.setInt(14, car.getNoOfDoors());
+            updateColumnsStatement.setInt(15, car.getCo2());
+            updateColumnsStatement.setString(16, car.getAirConditioner());
+            updateColumnsStatement.setString(17, car.getNavigation());
+
+
+            log.debug("Update Column query = " + query);
+
+            if (updateColumnsStatement.execute()) {
+                log.debug("Update of columns for car with vin " + car.getVin() + "was executed successfully");
             }
             else {
-                log.error("Column " + column + " couldn't be updated");
+                log.error("Columns of car having vin " + car.getVin() + " couldn't be updated");
+
             }
 
         } catch (SQLException throwables) {
@@ -159,4 +179,44 @@ public class DBVehicle extends DBConnection {
             log.error(throwables.getStackTrace());
         }
     }
+
+    public Vehicle getCarByVin (String vin) {
+
+        Vehicle car;
+
+        try (PreparedStatement stmt = db.prepareStatement("SELECT * FROM vehicles WHERE vin = ? ") ){
+
+            stmt.setString(1, vin);
+
+            ResultSet rs = stmt.executeQuery();
+
+            rs.next();
+
+            car = new Vehicle(rs.getString("car_maker"),
+                        rs.getString("model"),
+                        rs.getInt("model_year"),
+                        vin,
+                        rs.getString("fuel_type"),
+                        rs.getString("license_plate"));
+            car.setOdometer(rs.getInt("odometer"));
+            car.setTransmission(rs.getString("transmission"));
+            car.setPower(rs.getInt("power"));
+            car.setFuelConsumption(rs.getDouble("fuel_consumption"));
+            car.setBody(rs.getString("body"));
+            car.setNoOfPassengers(rs.getInt("no_of_passengers"));
+            car.setLuggage(rs.getInt("luggage"));
+            car.setNoOfDoors(rs.getInt("no_of_doors"));
+            car.setCo2(rs.getInt("co2"));
+            car.setAirConditioner(rs.getString("air_cond"));
+            car.setNavigation(rs.getString("navigation"));
+
+            return car;
+
+        } catch (SQLException throwables) {
+            log.error(throwables.getStackTrace());
+        }
+
+        return null;
+    }
+
 }
