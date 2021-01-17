@@ -90,7 +90,7 @@
                     <a href="fleet?action=edit&vin=${car.getVin()}" >
                       <i class="fa fa-gear fa-lg"></i>
                     </a>
-                    <a href="fleet?action=remove&vin=${car.getVin()}" class="w3-right">
+                    <a href="fleet?action=remove&vin=${car.getVin()}" class="w3-right" >
                       <i class="fa fa-trash" style="font-size:20px;color:red"></i>
                     </a>
                 </td>
@@ -100,9 +100,10 @@
         </div>
       </div>    
     
+    <!-- FOOTER --> 
       <footer class="footer" id="myFooter">
         <div class="w3-container w3-theme-l2 w3-padding-32">
-          <h4>Fleet Management System</h4>
+          <h4>Fleet Management System - ALPHA stage</h4>
         </div>
 
         <div class="w3-container w3-theme-l1">
