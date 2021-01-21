@@ -4,7 +4,7 @@
  * @author Cezar FLOREA
  */
 
-package fms.vehicles;
+package fms.entities;
 
 public class Vehicle {
 

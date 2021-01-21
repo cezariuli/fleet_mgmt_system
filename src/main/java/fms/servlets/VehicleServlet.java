@@ -2,7 +2,7 @@ package fms.servlets;
 
 import fms.database.DBCustomTypes;
 import fms.database.DBVehicle;
-import fms.vehicles.Vehicle;
+import fms.entities.Vehicle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

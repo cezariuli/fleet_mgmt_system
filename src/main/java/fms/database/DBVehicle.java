@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import fms.vehicles.Vehicle;
+import fms.entities.Vehicle;
 
 public class DBVehicle extends DBConnection {
 
