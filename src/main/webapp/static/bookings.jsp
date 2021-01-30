@@ -86,13 +86,26 @@
                 <table class="w3-table-all w3-hoverable">
                   <tr class="w3-light-blue">
                     <th>License plate</th>
+                    <!--
                     <th>Constructor</th>
                     <th>Model</th>
+                    -->
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Client</th>
                     <th>Status</th>
+                    <th>Comments</th>
                   </tr>
+                  <c:forEach var="crtb" items="${requestScope.currentBookings}">
+                    <tr>
+                      <td><c:out value="${crtb.getLicensePlate()}"/></td>
+                      <td><c:out value="${crtb.getStartDate()}"/></td>
+                      <td><c:out value="${crtb.getEndDate()}"/></td>
+                      <td><c:out value="${crtb.getClient()}"/></td>
+                      <td><c:out value="${crtb.getStatus()}"/></td>
+                      <td><c:out value="${crtb.getComments()}"/></td>
+                    </tr>
+                  </c:forEach>
                 </table>
               </div>
 
@@ -102,13 +115,26 @@
                 <table class="w3-table-all w3-hoverable">
                   <tr class="w3-light-blue">
                     <th>License plate</th>
+                    <!--
                     <th>Constructor</th>
-                    <th>Model</th>
+                    <th>Model</th> 
+                    -->
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Client</th>
                     <th>Status</th>
+                    <th>Comments</th>
                   </tr>
+                  <c:forEach var="ftrb" items="${requestScope.futureBookings}">
+                    <tr>
+                      <td><c:out value="${ftrb.getLicensePlate()}"/></td>
+                      <td><c:out value="${ftrb.getStartDate()}"/></td>
+                      <td><c:out value="${ftrb.getEndDate()}"/></td>
+                      <td><c:out value="${ftrb.getClient()}"/></td>
+                      <td><c:out value="${ftrb.getStatus()}"/></td>
+                      <td><c:out value="${ftrb.getComments()}"/></td>
+                    </tr>
+                  </c:forEach>
                 </table>
               </div>
 
@@ -118,21 +144,65 @@
                 <table class="w3-table-all w3-hoverable">
                   <tr class="w3-light-blue">
                     <th>License plate</th>
+                    <!--
                     <th>Constructor</th>
                     <th>Model</th>
+                  -->
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Client</th>
                     <th>Status</th>
+                    <th>Comments</th>
                   </tr>
+                  <c:forEach var="pstb" items="${requestScope.pastBookings}">
+                    <tr>
+                      <td><c:out value="${pstb.getLicensePlate()}"/></td>
+                      <td><c:out value="${pstb.getStartDate()}"/></td>
+                      <td><c:out value="${pstb.getEndDate()}"/></td>
+                      <td><c:out value="${pstb.getClient()}"/></td>
+                      <td><c:out value="${pstb.getStatus()}"/></td>
+                      <td><c:out value="${pstb.getComments()}"/></td>
+                    </tr>
+                  </c:forEach>
                 </table>
               </div>
 
               <!-- Content of the Create new booking page -->
               <div id="Create" class="w3-hide">
                 <h1 class="w3-text-teal">Create a new bookings</h1>
+                 <div class="w3-twothird w3-container w3-display-container">
+                  <form method="post" target="_self">
+                    <div class="w3-third w3-container">
+                      <label for="car">Car: </label><br>
+                      <select class="w3-margin-bottom" id="cars" name="cars" required>
+                        <c:forEach var="car" items="${requestScope.cars}">
+                        <option>
+                        <c:out value="${car.getLicensePlate()}"/>
+                        </option>
+                        </c:forEach>
+                      </select>
+                      <label for="start_date">Start date: </label><br>
+                      <input class="w3-margin-bottom" type="date" name="start_date" id="start_date" required><br>
+                      <label for="end_date">End date: </label><br>
+                      <input class="w3-margin-bottom" type="date" name="end_date" id="end_date" required><br>
+                      <label for="client">Client: </label><br>
+                      <input class="w3-margin-bottom" type="text" name="client" id="client" required><br>
+                      <label for="status">Status: </label><br>
+                      <select class="w3-margin-bottom" name="status" id="status" required><br>
+                        <option>Planned</option>
+                        <option>Ongoing</option>
+                        <option>Completed</option>
+                        <option>Canceled</option>
+                        <option>Abandoned</option>
+                      </select><br>
+                      <label for="comments">Comments: </label><br>
+                      <textarea class="w3-margin-bottom" name="comments" id="comments" rows="5" columns="15"/><br>
+                    </div>
+                    <input type="hidden" name="action" value="create">
+                    <input  class="w3-display-bottomright" type="submit" name="submit" value="Submit">
+                  </form>
+                 </div>
               </div>
-          
           </div>
         </div>
     <!-- END MAIN -->

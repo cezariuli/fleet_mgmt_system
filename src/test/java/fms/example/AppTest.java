@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import fms.database.DBCustomTypes;
 import fms.database.DBVehicle;
-import fms.vehicles.Vehicle;
+import fms.entities.Vehicle;
 import org.junit.Test;
 
 /**
