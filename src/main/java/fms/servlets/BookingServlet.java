@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import java.sql.Date;
-import java.util.List;
 
 @WebServlet(urlPatterns = {"/bookings"})
 
@@ -25,10 +24,10 @@ public class BookingServlet extends HttpServlet {
     private DBBooking bookingsDB;
     private DBVehicle carsDB;
     private List<Vehicle> cars = new ArrayList<Vehicle>();
-    private List<Booking> bookings = new ArrayList<Booking>();
-    private List<Booking> currentBookings = new ArrayList<Booking>();
-    private List<Booking> futureBookings = new ArrayList<Booking>();
-    private List<Booking> pastBookings = new ArrayList<Booking>();
+    private Set<Booking> bookings = new HashSet<Booking>();
+    private Set<Booking> currentBookings = new HashSet<Booking>();
+    private Set<Booking> futureBookings = new HashSet<Booking>();
+    private Set<Booking> pastBookings = new HashSet<Booking>();
     private List<String> licensePlates = new ArrayList<String>();
     private Date today;
 
@@ -46,9 +45,11 @@ public class BookingServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         cars = carsDB.getAllCars();
         bookings = bookingsDB.getAllBookings();
-
+        log.debug("doGet method of BookingServlet called.");
+        log.debug("List of bookings: ");
         for (Booking b:
              bookings) {
+            log.debug("Booking " + b.getId());
             if (today.before(b.getStartDate())) {
                 futureBookings.add(b);
                 log.debug("Booking " + b.getId() + " added to future list");
@@ -77,10 +78,29 @@ public class BookingServlet extends HttpServlet {
         String action = req.getParameter("action");
         Booking booking = new Booking();
 
+        log.debug("doPost method of BookingServlet called with action " + action);
+        booking.setLicensePlate(req.getParameter("cars"));
+        booking.setStartDate(Date.valueOf(req.getParameter("start_date")));
+        booking.setEndDate(Date.valueOf(req.getParameter("end_date")));
+        booking.setClient(req.getParameter("client"));
+        booking.setStatus(req.getParameter("status"));
+        booking.setComments(req.getParameter("comments"));
+
         switch (action) {
             case "create":
-
+                UUID uuid = UUID.randomUUID();
+                booking.setId(uuid);
+                bookingsDB.updateBookingInfo(booking, action);
+                break;
+            case "update":
+                booking.setId(UUID.fromString(req.getParameter("uuid")));
+                bookingsDB.updateBookingInfo(booking, action);
+                break;
+            default:
+                log.warn(action + " action is not valid!");
         }
+
+        req.getRequestDispatcher("/static/bookings.jsp").forward(req, resp);
     }
 
 }

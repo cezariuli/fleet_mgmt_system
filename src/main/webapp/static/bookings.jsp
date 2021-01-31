@@ -169,7 +169,7 @@
 
               <!-- Content of the Create new booking page -->
               <div id="Create" class="w3-hide">
-                <h1 class="w3-text-teal">Create a new bookings</h1>
+                <h1 class="w3-text-teal">Create a new booking</h1>
                  <div class="w3-twothird w3-container w3-display-container">
                   <form method="post" target="_self">
                     <div class="w3-third w3-container">
@@ -180,7 +180,7 @@
                         <c:out value="${car.getLicensePlate()}"/>
                         </option>
                         </c:forEach>
-                      </select>
+                      </select><br>
                       <label for="start_date">Start date: </label><br>
                       <input class="w3-margin-bottom" type="date" name="start_date" id="start_date" required><br>
                       <label for="end_date">End date: </label><br>
@@ -196,7 +196,8 @@
                         <option>Abandoned</option>
                       </select><br>
                       <label for="comments">Comments: </label><br>
-                      <textarea class="w3-margin-bottom" name="comments" id="comments" rows="5" columns="15"/><br>
+                      <textarea class="w3-margin-bottom" name="comments" id="comments" rows="5" columns="15">
+                      </textarea><br>
                     </div>
                     <input type="hidden" name="action" value="create">
                     <input  class="w3-display-bottomright" type="submit" name="submit" value="Submit">
@@ -211,13 +212,13 @@
     <!-- Footer -->
     <footer class="footer" id="myFooter">
         <div class="w3-container w3-theme-l2 w3-padding-32">
-        <h4>Fleet Management System - ALPHA stage</h4>
+          <h4>Fleet Management System - ALPHA stage</h4>
         </div>
 
         <div class="w3-container w3-theme-l1">
           <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
         </div>
-      </footer>
+    </footer>
 
 
 
