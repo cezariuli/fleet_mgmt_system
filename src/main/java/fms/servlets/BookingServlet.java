@@ -24,10 +24,6 @@ public class BookingServlet extends HttpServlet {
     private DBBooking bookingsDB;
     private DBVehicle carsDB;
     private List<Vehicle> cars = new ArrayList<Vehicle>();
-    private Set<Booking> bookings = new HashSet<Booking>();
-    private Set<Booking> currentBookings = new HashSet<Booking>();
-    private Set<Booking> futureBookings = new HashSet<Booking>();
-    private Set<Booking> pastBookings = new HashSet<Booking>();
     private List<String> licensePlates = new ArrayList<String>();
     private Date today;
 
@@ -43,6 +39,12 @@ public class BookingServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+        Set<Booking> bookings = new HashSet<Booking>();
+        Set<Booking> currentBookings = new HashSet<Booking>();
+        Set<Booking> futureBookings = new HashSet<Booking>();
+        Set<Booking> pastBookings = new HashSet<Booking>();
+
         cars = carsDB.getAllCars();
         bookings = bookingsDB.getAllBookings();
         log.debug("doGet method of BookingServlet called.");
