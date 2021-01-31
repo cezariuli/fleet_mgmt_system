@@ -41,7 +41,7 @@
         <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
         <a href="index.jsp" class="w3-bar-item w3-button w3-hide-small w3-hover-white ">Home</a>
         <a href="fleet" class="w3-bar-item w3-button w3-theme-l1">Fleet</a>
-        <a href="static/clientIndex.jsp" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Bookings</a>
+        <a href="bookings" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Bookings</a>
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>       
       </div>
     </div>
