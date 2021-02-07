@@ -1,6 +1,7 @@
 package fms.servlets;
 
 import fms.database.DBCustomTypes;
+import fms.database.DBMaintenance;
 import fms.database.DBVehicle;
 import fms.entities.Vehicle;
 import org.apache.logging.log4j.LogManager;
@@ -19,6 +20,7 @@ public class VehicleServlet extends HttpServlet {
 
     private DBVehicle carsDB;
     private DBCustomTypes dbCustomTypes;
+    private DBMaintenance mntncDB;
 
     static final Logger log = LogManager.getLogger(VehicleServlet.class.getName());
 
@@ -26,6 +28,7 @@ public class VehicleServlet extends HttpServlet {
     public void init() {
         carsDB = new DBVehicle();
         dbCustomTypes = new DBCustomTypes();
+        mntncDB = new DBMaintenance();
         log.info("VehicleServlet initialised");
     }
 
@@ -41,6 +44,9 @@ public class VehicleServlet extends HttpServlet {
                 break;
             case "edit":
                 forwardToEditForm(req, resp);
+                break;
+            case "maintenance":
+                forwardToMaintenancePage(req, resp);
                 break;
             case "remove":
                 carsDB.removeCar(req.getParameter("vin"));
@@ -161,5 +167,11 @@ public class VehicleServlet extends HttpServlet {
         log.debug("Navigation = " + req.getParameter("navigation") );
 
         return newCar;
+    }
+
+    private void forwardToMaintenancePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("mntnc_entries", mntncDB.getMaintenanceInfo());
+        req.getRequestDispatcher("/static/maintenance.jsp").forward(req, resp);
+        log.debug("Request of listing maintenance info forwarded to client.");
     }
 }
