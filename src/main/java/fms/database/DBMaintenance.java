@@ -6,10 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sun.rmi.rmic.Main;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -60,6 +57,48 @@ public class DBMaintenance extends DBConnection {
             log.error(throwables.getMessage());
         }
         return maintenance;
+    }
+
+    public void updateMaintenanceInfo(Maintenance m) {
+
+        String query = new String();
+
+        query = "UPDATE insurances SET end_date = ? " +
+                "WHERE id = '" + m.getInsuranceId() + "'";
+
+        try (PreparedStatement statement = db.prepareStatement(query)) {
+            statement.setDate(1, m.getInsuranceEndDate());
+
+            if (statement.execute()) {
+                log.debug("Insurance date with id:  " + m.getInsuranceId() + " was updated successfully");
+            }
+            else {
+                log.error("Insurance with id  " + m.getInsuranceId() + " couldn't be updated");
+            }
+        }
+        catch (SQLException throwables) {
+            log.error(throwables.getMessage());
+            log.error(throwables.getStackTrace());
+        }
+
+        query = "UPDATE service SET end_date = ? " +
+                "WHERE id = '" + m.getServiceId() + "'";
+
+        try (PreparedStatement statement = db.prepareStatement(query)) {
+            statement.setDate(1, m.getServiceEndDate());
+
+            if (statement.execute()) {
+                log.debug("Service date with id:  " + m.getServiceId() + " was updated successfully");
+            }
+            else {
+                log.error("Service date with id  " + m.getServiceId() + " couldn't be updated");
+            }
+        }
+        catch (SQLException throwables) {
+            log.error(throwables.getMessage());
+            log.error(throwables.getStackTrace());
+        }
+
     }
 
 
