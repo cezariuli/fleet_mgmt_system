@@ -43,7 +43,7 @@
         <a href="index.jsp" class="w3-bar-item w3-button w3-hide-small w3-hover-white ">Home</a>
         <a href="fleet" class="w3-bar-item w3-button w3-theme-l1">Fleet</a>
         <a href="bookings" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Bookings</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>       
+        <a href="static/contact.jsp" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>       
       </div>
     </div>
 

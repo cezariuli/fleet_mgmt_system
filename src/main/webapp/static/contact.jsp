@@ -1,61 +1,50 @@
 <!DOCTYPE html>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored="false" %>
-
-
 <html>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
-      html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
-      .w3-sidebar {
-        z-index: 3;
-        width: 250px;
-        top: 43px;
-        bottom: 0;
-        height: inherit;
-      }
-      .footer {
-        position: fixed;
-        left: 250px;
-        bottom: 0;
-        width: 100%;
-      }
-  </style>
-  <title>Fleet Management System</title>
+    <style>
+        html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+        .w3-sidebar {
+          z-index: 3;
+          width: 250px;
+          top: 43px;
+          bottom: 0;
+          height: inherit;
+        }
+        .footer {
+          position: fixed;
+          left: 250px;
+          bottom: 0;
+          width: 100%;
+        }
+    </style>
+    <title>Fleet Management System</title>
 </head>
-
 <body>
-
     <!-- Navbar -->
     <div class="w3-top">
       <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-        <a href="index.jsp" class="w3-bar-item w3-button w3-hide-small w3-hover-white ">Home</a>
-        <a href="fleet" class="w3-bar-item w3-button w3-theme-l1">Fleet</a>
-        <a href="bookings" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Bookings</a>
+        <a href="../index.jsp" class="w3-bar-item w3-button w3-theme-l1">Home</a>
+        <a href="../fleet" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Fleet</a>
+        <a href="../bookings" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Bookings</a>
         <a href="static/contact.jsp" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>       
       </div>
     </div>
 
-        <!-- Sidebar -->
+    <!-- Sidebar -->
     <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
       <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
       <i class="fa fa-remove"></i>
       </a>
-      <a class="w3-bar-item w3-button w3-hover-black" href="fleet">List cars</a>
-      <a class="w3-bar-item w3-button w3-hover-black" href="fleet?action=maintenance">Maintenance</a>
-      <a class="w3-bar-item w3-button w3-hover-black" href="fleet?action=add">Add new car</a>
-
+      <!--
+      <a class="w3-bar-item w3-button w3-hover-black" href="#">Log in</a>
+    -->
     </nav>
 
     <!-- Overlay effect when opening sidebar on small screens -->
@@ -64,36 +53,19 @@
     <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
     <div class="w3-main" style="margin-left:250px">
 
-      <div class="w3-row w3-padding-64">
-        <div class="w3-twothird w3-container">
-          <h1 class="w3-text-teal">Maintenance information</h1>
-          <table class="w3-table-all w3-hoverable">
-              <tr class="w3-light-blue">
-                <th>Car</th>
-                <th>Insurance expiring date</th>
-                <th>Next technical inspection</th>
-                <th class="w3-center">Update</th>
-              </tr>
-              <c:forEach var="entry" items="${requestScope.mntnc_entries}">
-              <tr>
-                <td><c:out value="${entry.getLicensePlate()}"/></td>
-                <td><c:out value="${entry.getInsuranceEndDate()}"/></td>
-                <td><c:out value="${entry.getServiceEndDate()}"/></td>
-                <td class="w3-center" >
-                  <a href="fleet?action=maintenance&insId=${entry.getInsuranceId()}&servId=${entry.getServiceId()}">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                  </a>
-                </td>
-              </tr>
-              </c:forEach>
-          </table>
-        </div>
-      </div>    
+          <div class="w3-row w3-padding-64">
+            <div class="w3-twothird w3-container">
+              <h1 class="w3-text-teal">Contact</h1>
+              <p>Email: </p>
+              <p>Phone:</p>
+              <p>Address: </p>
+            </div>
+          </div>
     
-    <!-- FOOTER --> 
+    <!-- FOOOTER -->
       <footer class="footer" id="myFooter">
         <div class="w3-container w3-theme-l2 w3-padding-32">
-          <h4>Fleet Management System - ALPHA stage</h4>
+        <h4>Fleet Management System - ALPHA stage</h4>
         </div>
 
         <div class="w3-container w3-theme-l1">
@@ -103,7 +75,7 @@
 
     <!-- END MAIN -->
     </div>
-    
+
     <script>
     // Get the Sidebar
     var mySidebar = document.getElementById("mySidebar");

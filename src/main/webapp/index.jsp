@@ -33,7 +33,7 @@
         <a href="index.jsp" class="w3-bar-item w3-button w3-theme-l1">Home</a>
         <a href="fleet" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Fleet</a>
         <a href="bookings" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Bookings</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>       
+        <a href="static/contact.jsp" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>       
       </div>
     </div>
 
@@ -42,7 +42,9 @@
       <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
       <i class="fa fa-remove"></i>
       </a>
+      <!--
       <a class="w3-bar-item w3-button w3-hover-black" href="#">Log in</a>
+    -->
     </nav>
 
     <!-- Overlay effect when opening sidebar on small screens -->
