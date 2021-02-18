@@ -91,6 +91,7 @@ public class DBVehicle extends DBConnection {
             insertCarStatement.execute();
         } catch (SQLException e) {
             log.error(e.getStackTrace());
+            log.error(e.getMessage());
         }
     }
 
@@ -113,6 +114,7 @@ public class DBVehicle extends DBConnection {
             }
         } catch (SQLException throwables) {
             log.error(throwables.getStackTrace());
+            log.error(throwables.getMessage());
         }
         return cars;
     }
@@ -214,6 +216,7 @@ public class DBVehicle extends DBConnection {
 
         } catch (SQLException throwables) {
             log.error(throwables.getStackTrace());
+            log.error(throwables.getMessage());
         }
 
         return null;

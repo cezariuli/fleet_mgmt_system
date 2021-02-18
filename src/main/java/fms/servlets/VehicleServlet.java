@@ -1,10 +1,13 @@
 package fms.servlets;
 
 import fms.database.DBCustomTypes;
+import fms.database.DBMaintenance;
 import fms.database.DBVehicle;
+import fms.entities.Maintenance;
 import fms.entities.Vehicle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sun.rmi.rmic.Main;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
+import java.util.Set;
+import java.util.UUID;
 
 @WebServlet(urlPatterns = {"/fleet"})
 
@@ -19,6 +25,7 @@ public class VehicleServlet extends HttpServlet {
 
     private DBVehicle carsDB;
     private DBCustomTypes dbCustomTypes;
+    private DBMaintenance mntncDB;
 
     static final Logger log = LogManager.getLogger(VehicleServlet.class.getName());
 
@@ -26,6 +33,7 @@ public class VehicleServlet extends HttpServlet {
     public void init() {
         carsDB = new DBVehicle();
         dbCustomTypes = new DBCustomTypes();
+        mntncDB = new DBMaintenance();
         log.info("VehicleServlet initialised");
     }
 
@@ -41,6 +49,9 @@ public class VehicleServlet extends HttpServlet {
                 break;
             case "edit":
                 forwardToEditForm(req, resp);
+                break;
+            case "maintenance":
+                forwardToMaintenancePage(req, resp);
                 break;
             case "remove":
                 carsDB.removeCar(req.getParameter("vin"));
@@ -60,6 +71,7 @@ public class VehicleServlet extends HttpServlet {
 
         Vehicle car = new Vehicle();
 
+
         log.debug("doPost method of VehicleServlet called with action " + action);
 
         switch (action) {
@@ -73,6 +85,15 @@ public class VehicleServlet extends HttpServlet {
                 car = updateCarPropertiesInDB(req,resp);
                 carsDB.updateCarInfo(car, action);
                 forwardToList(req, resp);
+                break;
+
+            case "maintenance":
+                Maintenance mntnc = new Maintenance(UUID.fromString(req.getParameter("insId")),
+                        UUID.fromString(req.getParameter("servId")),
+                        req.getParameter("license_plate"),
+                        Date.valueOf(req.getParameter("ins_date")),
+                        Date.valueOf(req.getParameter("serv_date")));
+                mntncDB.updateMaintenanceInfo(mntnc);
                 break;
 
             default:
@@ -161,5 +182,33 @@ public class VehicleServlet extends HttpServlet {
         log.debug("Navigation = " + req.getParameter("navigation") );
 
         return newCar;
+    }
+
+    private void forwardToMaintenancePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        Set<Maintenance> mntncInfo = mntncDB.getMaintenanceInfo();
+
+        if (req.getParameter("insId") != null || req.getParameter("servId") != null) {
+            log.debug("Request to edit maintenance info.");
+            for (Maintenance m:
+                 mntncInfo) {
+                log.debug("Insurance ID: " + m.getInsuranceId().toString());
+                log.debug("Service ID: " + m.getServiceId().toString());
+                if ((m.getInsuranceId().toString().equals(req.getParameter("insId").toString())) || (m.getServiceId().toString().equals(req.getParameter("servId").toString())) ) {
+                    req.setAttribute("mntnc", m);
+                    log.debug("IDs matched");
+                    break;
+                }
+
+            }
+            req.getRequestDispatcher("/static/maintenanceEdit.jsp").forward(req, resp);
+
+        }
+        else {
+            req.setAttribute("mntnc_entries", mntncInfo);
+            req.getRequestDispatcher("/static/maintenance.jsp").forward(req, resp);
+            log.debug("Request of listing maintenance info forwarded to client.");
+        }
+
     }
 }
